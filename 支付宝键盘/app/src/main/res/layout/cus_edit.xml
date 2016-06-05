@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/parking_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dip"
+        android:background="@color/gray"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:background="@color/parking_line" />
+
+        <EditText
+            android:id="@+id/mEdt_parking_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:padding="2dip" >
+        </EditText>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:background="@color/parking_line" />
+
+        <EditText
+            android:id="@+id/mEdt_parking_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:padding="2dip" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:background="@color/parking_line" />
+
+        <EditText
+            android:id="@+id/mEdt_parking_three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:padding="2dip" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:background="@color/parking_line" />
+
+        <EditText
+            android:id="@+id/mEdt_parking_four"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:background="@color/parking_line" />
+
+        <EditText
+            android:id="@+id/mEdt_parking_five"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:background="@color/parking_line" />
+
+        <EditText
+            android:id="@+id/mEdt_parking_six"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:background="@color/parking_line" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/parking_line" />
+
+</LinearLayout>

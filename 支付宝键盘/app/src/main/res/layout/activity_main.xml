@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/id_main_root"
+    tools:context=".MainActivity">
+
+    <com.cbs.myapplication.MyEditText
+        android:id="@+id/mEdt_num"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+    </com.cbs.myapplication.MyEditText>
+
+
+</RelativeLayout>
