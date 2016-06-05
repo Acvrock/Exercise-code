@@ -1,0 +1,1 @@
+http://www.oschina.net/translate/getting-started-with-rabbitmq-in-java
