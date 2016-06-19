@@ -13,10 +13,10 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		String str = "";
-		try {
-			str = new String(BackAES.encrypt("TEST", "admin00000000000", 0));
+		try { 
+			str = new String(BackAES.encrypt("465722251714617", "mNTOUSrrYeIbpIsZ", 0));
 			((TextView)findViewById(R.id.textView1)).setText(str);
-			str = BackAES.decrypt(str, "admin00000000000", 0);
+			str = BackAES.decrypt(str, "mNTOUSrrYeIbpIsZ", 0);
 			((TextView)findViewById(R.id.textView2)).setText(str);
 		} catch (Exception e) {
 			e.printStackTrace();
