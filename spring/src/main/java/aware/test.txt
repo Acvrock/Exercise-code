@@ -1,0 +1,1 @@
+By combining Spring configuration files in a file set you tell IntelliJ IDEA that these files are mutually related. In this way you form a common editing context for these configuration files and get all the associated coding assistance.
