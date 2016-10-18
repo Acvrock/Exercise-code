@@ -88,6 +88,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("/index");
         registry.addViewController("/toUpload").setViewName("/upload");
         registry.addViewController("/converter").setViewName("/conventer");
+        registry.addViewController("/sse").setViewName("/sse");
     }
 
     @Override
