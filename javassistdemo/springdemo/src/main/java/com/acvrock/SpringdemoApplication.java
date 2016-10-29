@@ -10,10 +10,11 @@ public class SpringdemoApplication {
         SpringApplication.run(SpringdemoApplication.class, args);
 
 //        new ClassPathXmlApplicationContext("/META-INF/applicationContext.xml");
-
         // Instantiate class by new'ing it up. i.e., Do not obtain from Spring context
         HelloWorldClient client = new HelloWorldClient();
         client.sayHello();
+        HelloWorldService helloWorldService = (HelloWorldService) SpringUtil.getBean("helloWorldService");
+        System.out.println(helloWorldService);
     }
 
 

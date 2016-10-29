@@ -14,7 +14,7 @@ public class HelloWorldClient {
     private HelloWorldService service;
 
     public void sayHello() {
-
         service.sayHello();
+        System.out.println(service);
     }
 }
