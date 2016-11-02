@@ -22,7 +22,6 @@ public class DataController {
 
     @Autowired
     PersonRepository personRepository;
-
     /**
      * 保存
      * save支持批量保存：<S extends T> Iterable<S> save(Iterable<S> entities);
@@ -120,6 +119,15 @@ public class DataController {
     public Page<Person> page() {
 
         Page<Person> pagePeople = personRepository.findAll(new PageRequest(1, 2));
+
+        return pagePeople;
+
+    }
+
+    @RequestMapping("/auto")
+    public Page<Person> auto(Person person){
+
+        Page<Person> pagePeople = personRepository.findByAuto(person, new PageRequest(0, 3));
 
         return pagePeople;
 
