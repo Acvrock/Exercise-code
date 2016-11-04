@@ -11,10 +11,12 @@ import org.springframework.data.rest.core.annotation.RestResource;
  *
  * @Description:
  */
-@RepositoryRestResource(path = "people")
+@RepositoryRestResource(collectionResourceRel = "people", path = "people")
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
     @RestResource(path = "nameStartsWith", rel = "nameStartsWith")
-    Person findByNameStartsWith(@Param("name")String name);
+    Person findByNameStartsWith(@Param("name") String name);
+
+//    List<Person> findByLastName(@Param("name") String name);
 
 }
