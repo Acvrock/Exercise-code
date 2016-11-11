@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--使用默认构造器注入-->
+    <bean name="product" class="Product"/>
+
+    <!--使用工厂方法注入-->
+    <bean id="calendar" class="java.util.Calendar" factory-method="getInstance"/>
+    <!--Destroy Method 方法会在类销毁前调用-->
+    <bean id="productDestroyTest" class="Product" factory-method="init"
+          destroy-method="destroy"/>
+
+    <!--使用参数名在注入时初始化参数-->
+    <bean name="featuredProduct" class="Product">
+        <constructor-arg name="name" value="Product Name 1"/>
+        <constructor-arg name="description" value="The product description 1"/>
+        <constructor-arg name="price" value="10.3"/>
+    </bean>
+    <!--使用参数名在注入时初始化参数-->
+    <bean name="featuredProduct2" class="Product">
+        <constructor-arg index="0" value="Product Name 2"/>
+        <constructor-arg index="1" value="The product description 2"/>
+        <constructor-arg index="2" value="12.3"/>
+    </bean>
+
+    <!--使用 setter 注入-->
+    <bean name="topic" class="Topic">
+        <property name="product" ref="featuredProduct2"/>
+    </bean>
+
+    <!--使用 构造器 注入-->
+    <bean name="topic2" class="Topic">
+        <constructor-arg name="product" ref="featuredProduct2"/>
+    </bean>
+</beans>
