@@ -50,3 +50,18 @@ lambda 表达式的方法体和嵌套代码块有着相同的作用域，所以�
 使用 Collectors 类中的 groupingBy 和 partitioningBy 方法对 Stream 进行分组   
 Java8 默认对原始类型提供了专门的 Stream，如 ing、long、double   
 使用并行 Stream 时，请保证他不带有副作用，并且不保证排序约定   
+
+Stream 和 集合的区别：  
+1. Stream 自己不会存储元素
+2. Stream 操作符不会改变源对象
+3. Stream 操作符可能延迟执行
+
+使用 Stream 过程   
+1. 创建一个 Stream
+2. 在1～N 个步骤中，制定将 Stream 转换成另外一个 Stream 的中间操作
+3. 使用终止操作产生一个结果，该操作会让之前的中间操作立即强制执行，之后该 Stream 就不会再被使用了
+
+创建 Stream 方法
+1. java.util.stream.Stream.of 方法
+2. Stream.empty
+3. Stream.generate
