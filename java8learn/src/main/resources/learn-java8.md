@@ -39,6 +39,14 @@ lambda 表达式的方法体和嵌套代码块有着相同的作用域，所以�
 2. 接口冲突，覆盖该方法来解决冲突,程序员手动指定要使用哪个默认方法   
 优先使用类中的方法，即“类优先”原则   
 
-接口中的静态方法   
+接口中可以声明一些静态方法   
 
-
+迭代器意味着特定的遍历策略，禁制了高效的并发执行    
+从集合中创建 Stream   
+使用 filter 选择元素，使用 map 改变元素      
+使用 limit、distinct、sorted 改变元素   
+使用 reduction 操作符获得结果，如 count、max、min、findFirst、findAny、orElse   
+使用 Optional 类型安全代替 null 借助 ifPresent 和 orElse 方法   
+使用 Collectors 类中的 groupingBy 和 partitioningBy 方法对 Stream 进行分组   
+Java8 默认对原始类型提供了专门的 Stream，如 ing、long、double   
+使用并行 Stream 时，请保证他不带有副作用，并且不保证排序约定   
