@@ -89,5 +89,16 @@ anyMatch  只是看一下有没有匹配的
 allMatch  所有元素都匹配   
 noneMatch  所有元素都不匹配   
 
-Optional 类型是一种比较好的表示缺少返回值的方法   
+Optional 类型是一种比较好的表示缺少返回值的方法      
+如何使用：使用一个或者接受正确值、或者返回另一个替代值的方法   
+ifPresent 接受一个函数，如果 Optional 存在值，那么他将会把该值传递给函数，否值不做任何操作   
+map 待解释...   
+orElse  如果没有值，那么就使用替代值   
+orElseGet 如果没有值，那么就调用方法  
+orElseThrow 如果没有值，那么就抛出异常   
+
+创建可选值  
+Optional.of   
+Optional.empty   
+ofNullable(obj)  如果 obj 不为 null 那么回返回 of(obj) ，否则回返回 empty()   
 
