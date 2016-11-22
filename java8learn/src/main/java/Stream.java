@@ -60,5 +60,8 @@ public class Stream {
         }
         long endTime5 = System.currentTimeMillis();
         System.out.println("程序运行时间： " + (endTime5 - startTime5) + "ms");
+
+        java.util.stream.Stream<Double> randoms = java.util.stream.Stream.generate(Math::random).limit(100);
+
     }
 }

@@ -65,3 +65,29 @@ Stream 和 集合的区别：
 1. java.util.stream.Stream.of 方法
 2. Stream.empty
 3. Stream.generate
+
+
+filter 方法的参数是一个 Predicate<T> 对象，即一个从 T 到 boolean 的函数   
+map 方法可以实现对流中的值进行某种形式的转换   
+flatMap 待解释...   
+limit 方法可以提取子流   
+skip 方法可以丢弃前面 N 个元素   
+concat 方法可以组合两个流   
+peek 方法可以产生另一个与原始流具有相同元素的流，但是在每次获取一个元素时调用一个函数以便于调试  
+
+有状态的转换   
+distinct 方法可以去重   
+sorted 方法可以进行排序   
+
+聚合方法  
+count 
+min   
+max   
+findFirst 查找第一个   
+findAny 查找所有   
+anyMatch  只是看一下有没有匹配的   
+allMatch  所有元素都匹配   
+noneMatch  所有元素都不匹配   
+
+Optional 类型是一种比较好的表示缺少返回值的方法   
+
