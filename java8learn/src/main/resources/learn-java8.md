@@ -102,3 +102,26 @@ Optional.of
 Optional.empty   
 ofNullable(obj)  如果 obj 不为 null 那么回返回 of(obj) ，否则回返回 empty()   
 
+聚合操作    
+将流中的元素组合为一个值，可以使用聚合方法，常见的有：求和、求积、字符串追加、求最大值和最小值、求并集和交集等      
+reduce 从流的前两个元素开始，不断将它应用到流中的其他元素上   
+
+收集结果   
+toArray    
+collect  待解释...   
+collect 需要接受三个参数：  
+1. 一个能创建目标类型实例等方法，例如 HashSet 的构造函数   
+2. 一个将元素添加到目标的方法，例如一个 add 方法  
+3. 一个将两个对象整合到一起的方法，例如 addAll 方法    
+
+例如： ```HashSet<String> result = stream.collect(HashSet::new,HashSet::add,HashSet::addAll);```   
+但实际上 Collector 接口已经为我们提供了这三个方法，并且在 Collectiors 中提供了工厂方法  
+```Set<String> result = stream.collect(Collectors.toSet());```   如果想控制返回的类型，可使用  ```ThreeSet<String> result = stream.collect(Collectors.toCollection(ThreeSet::new));```   
+把流中所有的字符串连接并收集起来，可以调用 Collectors.joining()   
+如果希望在这些元素中添加一个分隔符，那么可以传递分隔符给 joining ,如 Collectors.joining(",")   
+求总和、平均值、最大值、最小值可以使用：summarizing(int|Long|Double)     
+```Map<Integer,String> idToName = peple.collect(Colletors.toMap(Person::getId,Person::getName));```   
+Collectors.groupingBy 进行分组的分类函数   
+Collectors.partitioningBy 更高效的分类函数  
+
+
