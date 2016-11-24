@@ -125,3 +125,21 @@ Collectors.groupingBy 进行分组的分类函数
 Collectors.partitioningBy 更高效的分类函数  
 
 
+原始类型流   
+Stream API 提供了原始类型的流，如: IntStream、LongStream、DoubleStream   
+IntStream.range  和 IntStream.rengeClosed  生成步进为 1 的一个整数范围   
+CharSequence.codePoints 和 CharSequence.chars 生成包含字符 Unicode 代码的流  
+Random 类提供 ints\longs\doubles 来返回包含随机数字的原始类型流   
+
+并行流  
+待解释...   
+
+函数式接口   
+待解释...   
+
+使用 lambda 表达式的原因：延迟代码执行时间点   
+执行 lambda 时，请确认所有必需的数据作为输入   
+如果可以，请选择已经有的函数式表达式   
+编写返回函数式接口实例的方法   
+使用转换时，请考虑如何组合它们   
+延迟组合转换，你需要保留一个所有未执行的转换列表，并在最后应用他们   
