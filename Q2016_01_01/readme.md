@@ -112,3 +112,104 @@ out
 1222
 ```   
 行优先遍历的速度比较快，因为二维数组就是一个一维数组里放一个一维数组    
+
+Q3
+
+```
+4题
+定义Java类Salary {String name, int baseSalary, int bonus  },随机产生1万个实例，属性也随机产生（baseSalary范围是5-100万，
+bonus为（0-10万），其中name长度为5，随机字符串，然后进行排序，排序方式为收入总和（baseSalary*13+bonus），
+输出收入最高的10个人的名单
+```
+
+```
+public class Q4 {
+    static final int W = 10000;
+    static final int BASESALARYMAX = 100 * W;
+    static final int BASESALARYMIN = 5 * W;
+    static final int BASESALARYRYBOUND = BASESALARYMAX - BASESALARYMIN + 1;
+    static final int BOUNDMAX = 10 * W;
+    static final int BOUNDBOUND = BOUNDMAX + 1;
+    static final String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    public static void main(String[] args) {
+        Salary[] salaries = new Salary[10000];
+        Random random = new Random();
+        List<Salary> collect = Arrays.stream(salaries).map(salary -> {
+                    salary = new Salary();
+                    salary.setBaseSalary(random.nextInt(BASESALARYRYBOUND) + BASESALARYMIN);
+                    salary.setBonus(random.nextInt(BOUNDBOUND));
+                    StringBuffer buf = new StringBuffer();
+                    for (int i = 0; i < 5; i++) {
+                        int num = random.nextInt(62);
+                        buf.append(str.charAt(num));
+                    }
+                    salary.setName(buf.toString());
+                    return salary;
+                }
+        ).sorted().limit(10).collect(Collectors.toList());
+        for (Salary salary : collect) {
+            System.out.println(salary);
+        }
+    }
+
+    static class Salary implements Comparable {
+        private String name;
+        private int baseSalary;
+        private int bonus;
+
+        public int compareTo(Object o) {
+            Salary salary = (Salary) o;
+            return Integer.compare(salary.getBaseSalary() * 13 + salary.getBonus(), baseSalary * 13 + bonus);
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setBaseSalary(int baseSalary) {
+            this.baseSalary = baseSalary;
+        }
+
+        public void setBonus(int bonus) {
+            this.bonus = bonus;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getBaseSalary() {
+            return baseSalary;
+        }
+
+        public int getBonus() {
+            return bonus;
+        }
+
+        @Override
+        public String toString() {
+            return "Salary{" +
+                    "name='" + name + '\'' +
+                    ", baseSalary=" + baseSalary +
+                    ", bonus=" + bonus +
+                    '}';
+        }
+    }
+}
+```
+out
+
+```
+Salary{name='HKaDN', baseSalary=999607, bonus=91133}
+Salary{name='3idVf', baseSalary=999356, bonus=93523}
+Salary{name='Zj0PC', baseSalary=999057, bonus=96805}
+Salary{name='3jumO', baseSalary=998733, bonus=91274}
+Salary{name='yVNlW', baseSalary=998862, bonus=87629}
+Salary{name='wV3ti', baseSalary=998723, bonus=88584}
+Salary{name='LuaMP', baseSalary=997467, bonus=96577}
+Salary{name='brDou', baseSalary=997557, bonus=94881}
+Salary{name='9UWCU', baseSalary=998877, bonus=76922}
+Salary{name='eLVxw', baseSalary=998236, bonus=84132}
+```   
+
