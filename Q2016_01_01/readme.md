@@ -70,7 +70,7 @@ out
 2147483136
 1111111111111111111111000000000
 ```   
-### Q2
+### Q3
 ```
 定义一个10240*10240的byte数组，分别采用行优先与列优先的循环方式来计算 这些单元格的总和，看看性能的差距，并解释原因
 行优先的做法，每次遍历一行，然后到下一行。
@@ -113,10 +113,9 @@ out
 ```   
 行优先遍历的速度比较快，因为二维数组就是一个一维数组里放一个一维数组    
 
-Q3
+Q4
 
 ```
-4题
 定义Java类Salary {String name, int baseSalary, int bonus  },随机产生1万个实例，属性也随机产生（baseSalary范围是5-100万，
 bonus为（0-10万），其中name长度为5，随机字符串，然后进行排序，排序方式为收入总和（baseSalary*13+bonus），
 输出收入最高的10个人的名单
@@ -212,4 +211,156 @@ Salary{name='brDou', baseSalary=997557, bonus=94881}
 Salary{name='9UWCU', baseSalary=998877, bonus=76922}
 Salary{name='eLVxw', baseSalary=998236, bonus=84132}
 ```   
+
+Q5
+
+```
+编码实现下面的要求
+现有对象 MyItem {byte type,byte color,byte price} ，要求将其内容存放在一个扁平的byte[]数组存储数据的ByteStore {byte[] storeByteArry}对象里,
+即每个MyItem占用3个字节，第一个MyItem占用storeByteArry[0]-storeByteArry[2] 3个连续字节，以此类推，最多能存放1000个MyItem对象
+ByteStore提供如下方法
+putMyItem(int index,MyItem item) 在指定的Index上存放MyItem的属性，这里的Index是0-999，而不是storeByteArry的Index
+getMyItem(int index),从指定的Index上查找MyItem的属性，并返回对应的MyItem对象。
+
+要求放入3个MyItem对象（index为0-2）并比较getMyItem方法返回的这些对象是否与之前放入的对象equal。
+```
+
+```
+public class Q5 {
+
+    public static void main(String[] args) {
+        ByteStore byteStore = new ByteStore();
+        MyItem myItem0 = new MyItem((byte) 0, (byte) 1, (byte) 0);
+        MyItem myItem1 = new MyItem((byte) 1, (byte) 1, (byte) 1);
+        MyItem myItem2 = new MyItem((byte) 2, (byte) 1, (byte) 2);
+        byteStore.putMyItem(0, myItem0);
+        byteStore.putMyItem(1, myItem1);
+        byteStore.putMyItem(2, myItem2);
+        System.out.println(byteStore.getMyItem(0).equals(myItem0));
+        System.out.println(byteStore.getMyItem(1).equals(myItem1));
+        System.out.println(byteStore.getMyItem(2).equals(myItem2));
+
+    }
+
+    static class MyItem {
+        byte type;
+        byte color;
+        byte price;
+
+        public MyItem() {
+        }
+
+        public MyItem(byte type, byte color, byte price) {
+            this.type = type;
+            this.color = color;
+            this.price = price;
+        }
+
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof MyItem)) return false;
+
+            MyItem myItem = (MyItem) o;
+
+            if (type != myItem.type) return false;
+            if (color != myItem.color) return false;
+            return price == myItem.price;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = (int) type;
+            result = 31 * result + (int) color;
+            result = 31 * result + (int) price;
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return "MyItem{" +
+                    "type=" + type +
+                    ", color=" + color +
+                    ", price=" + price +
+                    '}';
+        }
+    }
+
+    static class ByteStore {
+        byte[] storeByteArry = new byte[1000 * 3];
+
+        public void putMyItem(int index, MyItem item) {
+            int offset = index * 3;
+            storeByteArry[offset] = item.type;
+            storeByteArry[offset + 1] = item.color;
+            storeByteArry[offset + 2] = item.price;
+        }
+
+        public MyItem getMyItem(int index) {
+            int offset = index * 3;
+            MyItem myItem = new MyItem();
+            myItem.type = storeByteArry[offset];
+            myItem.color = storeByteArry[offset + 1];
+            myItem.price = storeByteArry[offset + 2];
+            return myItem;
+        }
+    }
+}
+
+```
+
+### Q6
+
+```
+Arrays.parallelSort在数组超过多少时候才开启并行排序？采用位运算，给出推导过程
+```
+
+```
+public class Q6 {
+    public static void main(String[] args) {
+        System.out.println(1 << 13);
+        Random random = new Random();
+        List<int[]> arrays = new ArrayList<>();
+        arrays.add(random.ints().limit(1 << 20).toArray());
+        arrays.add(random.ints().limit(1 << 19).toArray());
+        arrays.add(random.ints().limit(1 << 18).toArray());
+        arrays.add(random.ints().limit(1 << 17).toArray());
+        arrays.add(random.ints().limit(1 << 16).toArray());
+        arrays.add(random.ints().limit(1 << 15).toArray());
+        arrays.add(random.ints().limit(1 << 14).toArray());
+        arrays.add(random.ints().limit(1 << 13).toArray());
+        arrays.add(random.ints().limit(1 << 12).toArray());
+        arrays.add(random.ints().limit(1 << 11).toArray());
+        arrays.add(random.ints().limit(1 << 10).toArray());
+        arrays.add(random.ints().limit(1 << 9).toArray());
+        arrays.add(random.ints().limit(1 << 8).toArray());
+        arrays.add(random.ints().limit(1 << 7).toArray());
+        arrays.add(random.ints().limit(1 << 6).toArray());
+        arrays.add(random.ints().limit(1 << 5).toArray());
+        arrays.add(random.ints().limit(1 << 4).toArray());
+        arrays.add(random.ints().limit(1 << 3).toArray());
+        arrays.add(random.ints().limit(1 << 2).toArray());
+        arrays.add(random.ints().limit(1 << 1).toArray());
+        for (int i = 0; i < arrays.size(); i++) {
+            long start1 = new Date().getTime();
+            for (int j = 0; j <(1 << (i+1)); j++) {
+                Arrays.parallelSort(arrays.get(i));
+            }
+            long end1 = new Date().getTime();
+            System.out.println(end1 - start1+"ms 长度 "+arrays.get(i).length);
+        }
+    }
+}
+```
+### Q7
+
+```
+DualPivotQuicksort 算法与普通冒泡算法相比，有哪些改进，对比常见的几种基于数组的排序算法，说说为什么Java选择了快排
+```
+
+```
+对比冒泡算法，快速排序采用了分治法，每一趟排序都把问题的规模减低
+Java 内的 DualPivotQuicksort 对比普通的快速排序，实现了：小数组使用插入排序、双枢轴快速三向切分、五取样划分
+```
 
