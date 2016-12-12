@@ -33,7 +33,7 @@
 | :-: | :-: |:-: |:-: |:-: |:-:|:-:|:-:|:-:|
 |  1  |  1  | 1  | 1  | 1  | 1 | 1 | 0 | 0 |     
 
-需要使用 9 个 bit 来盛放该值，但是``` 1 byte = 8 bit``` ,所以使用 byte 无法正确的表示该值，可以使用 short/int 来表示该值   
+需要使用 9 个 bit 来盛放该值，但是``` 1 byte = 8 bit``` ,所以使用 byte 无法正确的表示该值，可以使用 short/int 来表示该值，或者强制用 byte 来表示，这时候会丢弃 256 位的值，二进制表示为： 11111100,转为 byte 就是 -4 
 
 ### Q2
 ```
@@ -319,40 +319,30 @@ Arrays.parallelSort在数组超过多少时候才开启并行排序？采用位�
 ```
 public class Q6 {
     public static void main(String[] args) {
-        System.out.println(1 << 13);
         Random random = new Random();
         List<int[]> arrays = new ArrayList<>();
-        arrays.add(random.ints().limit(1 << 20).toArray());
-        arrays.add(random.ints().limit(1 << 19).toArray());
-        arrays.add(random.ints().limit(1 << 18).toArray());
-        arrays.add(random.ints().limit(1 << 17).toArray());
-        arrays.add(random.ints().limit(1 << 16).toArray());
-        arrays.add(random.ints().limit(1 << 15).toArray());
-        arrays.add(random.ints().limit(1 << 14).toArray());
+        arrays.add(random.ints().limit((1 << 13) - 1).toArray());
         arrays.add(random.ints().limit(1 << 13).toArray());
-        arrays.add(random.ints().limit(1 << 12).toArray());
-        arrays.add(random.ints().limit(1 << 11).toArray());
-        arrays.add(random.ints().limit(1 << 10).toArray());
-        arrays.add(random.ints().limit(1 << 9).toArray());
-        arrays.add(random.ints().limit(1 << 8).toArray());
-        arrays.add(random.ints().limit(1 << 7).toArray());
-        arrays.add(random.ints().limit(1 << 6).toArray());
-        arrays.add(random.ints().limit(1 << 5).toArray());
-        arrays.add(random.ints().limit(1 << 4).toArray());
-        arrays.add(random.ints().limit(1 << 3).toArray());
-        arrays.add(random.ints().limit(1 << 2).toArray());
-        arrays.add(random.ints().limit(1 << 1).toArray());
-        for (int i = 0; i < arrays.size(); i++) {
-            long start1 = new Date().getTime();
-            for (int j = 0; j <(1 << (i+1)); j++) {
-                Arrays.parallelSort(arrays.get(i));
-            }
-            long end1 = new Date().getTime();
-            System.out.println(end1 - start1+"ms 长度 "+arrays.get(i).length);
+        arrays.add(random.ints().limit((1 << 13) + 1).toArray());
+        for (int[] array : arrays) {
+            Arrays.parallelSort(array);
+            System.out.println(array.length);
+            System.out.println(ForkJoinPool.commonPool());
         }
     }
 }
 ```
+out   
+
+```
+8191
+java.util.concurrent.ForkJoinPool@51081592[Running, parallelism = 7, size = 0, active = 0, running = 0, steals = 0, tasks = 0, submissions = 0]
+8192
+java.util.concurrent.ForkJoinPool@51081592[Running, parallelism = 7, size = 0, active = 0, running = 0, steals = 0, tasks = 0, submissions = 0]
+8193
+java.util.concurrent.ForkJoinPool@51081592[Running, parallelism = 7, size = 3, active = 0, running = 0, steals = 3, tasks = 0, submissions = 0]
+```
+
 ### Q7
 
 ```
