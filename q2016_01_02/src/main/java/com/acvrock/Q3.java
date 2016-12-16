@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.*;
 
 /**
  * Created by moon on 12/12/2016.
@@ -45,10 +42,19 @@ public class Q3 {
 
         write("salaries", bytes);
 
-        Map<String, List<String>> salaries = Files.readAllLines(Paths.get("salaries"), Charset.defaultCharset())
+        Map<String, List<Integer>> salaries = Files.readAllLines(Paths.get("salaries"), Charset.defaultCharset())
                 .stream()
-                .collect(groupingBy(s -> s.substring(0, 2)));
+                .collect(
+                        groupingBy(s -> s.substring(0, 2),
+                                mapping(s1 -> Integer.parseInt(s1.substring(6, s1.lastIndexOf(","))),
+                                        toList())));
+        Object[] objects = salaries.entrySet().stream()
+                .sorted(Comparator.comparing(values -> values.getValue().stream().mapToInt(Integer::intValue).sum())).toArray();
+//                .map(Map.Entry::getKey)
+//                .collect(Collectors.toList());
+
         System.out.println(salaries);
+        System.out.println(Arrays.toString(objects));
 
     }
 
