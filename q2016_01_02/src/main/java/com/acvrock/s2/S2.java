@@ -9,11 +9,11 @@ import java.util.*;
 import static java.util.stream.Collectors.*;
 
 /**
- * Created by moon on 12/12/2016.
+ * Created by moon on 18/12/2016.
  *
  * @Description:
  */
-public class Q3 {
+public class S2 {
     static final int W = 10000;
     static final int BASESALARYMAX = 100 * W;
     static final int BASESALARYMIN = 5 * W;

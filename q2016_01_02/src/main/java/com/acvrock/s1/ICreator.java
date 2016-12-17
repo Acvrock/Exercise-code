@@ -5,7 +5,7 @@ package com.acvrock.s1;
  *
  * @Description:
  */
-public interface IPacketCreator {
+public interface ICreator {
     public String handleContent( String in);
 }
 

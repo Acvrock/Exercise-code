@@ -5,17 +5,17 @@ package com.acvrock.s1;
  *
  * @Description:
  */
-public abstract class PacketDecorator implements IPacketCreator {
-    IPacketCreator component;
+public abstract class Decorator implements ICreator {
+    ICreator component;
 
-    public PacketDecorator() {
+    public Decorator() {
     }
 
-    public PacketDecorator(IPacketCreator creator) {
+    public Decorator(ICreator creator) {
         component = creator;
     }
 
-    public void setComponent(IPacketCreator component) {
+    public void setComponent(ICreator component) {
         if (this == component) throw new RuntimeException("不能循环装饰");
         this.component = component;
     }
