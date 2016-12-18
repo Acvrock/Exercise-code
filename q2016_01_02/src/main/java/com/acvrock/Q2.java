@@ -36,7 +36,6 @@ public class Q2 {
     private static void write(String paths, Iterable<? extends CharSequence> content) throws IOException {
         Files.write(Paths.get(paths), content);
     }
-
     /**
      * 一行代码写文件的封装
      *
@@ -47,8 +46,6 @@ public class Q2 {
     private static void write(String paths, byte[] content) throws IOException {
         Files.write(Paths.get(paths), content);
     }
-
-
     /**
      * 一行代码输出文件
      * <p>

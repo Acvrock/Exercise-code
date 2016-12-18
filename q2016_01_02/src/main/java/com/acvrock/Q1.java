@@ -71,7 +71,5 @@ public class Q1 {
         System.out.println("UTF-8 转 GBK 编码字符串:" + chinaGBK1);
         int chinaGBK1Length = getStringByteLength(chinaGBK1, GBK);
         System.out.println("字节数组长度" + chinaGBK1Length);
-
-
     }
 }

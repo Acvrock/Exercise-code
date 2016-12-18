@@ -1,12 +1,13 @@
-package com.acvrock;
+package com.acvrock.s2;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.*;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by moon on 18/12/2016.
@@ -44,8 +45,9 @@ public class S2 {
 //        存进文件
         write("salaries", bytes);
 
+
 //        取出文件内的数据并分组
-        Map<String, List<Integer>> salarieMap = Files.readAllLines(Paths.get("salaries"), Charset.defaultCharset())
+        Map<String, List<Integer>> salarieMap = read("salaries")
                 .stream()
                 .collect(
                         groupingBy(s -> s.substring(0, 2),
@@ -115,6 +117,39 @@ public class S2 {
      * @throws IOException
      */
     private static void write(String paths, byte[] content) throws IOException {
-        Files.write(Paths.get(paths), content);
+        FileOutputStream fileOutputStream = new FileOutputStream(paths);
+        FileChannel outChannel = fileOutputStream.getChannel();
+        ByteBuffer byteBuffer = ByteBuffer.wrap(content);
+        outChannel.write(byteBuffer);
+        outChannel.close();
+    }
+
+    public static List<String> read(String paths) throws IOException {
+        FileInputStream in = new FileInputStream(paths);
+        try {
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);// 创建缓存区
+            FileChannel fc = in.getChannel();
+            StringBuilder sb = new StringBuilder();
+            while (fc.read(byteBuffer) != -1) {// 读取字符以缓存区
+                byteBuffer.flip();// 反转缓存区，很重要的方法
+                while (byteBuffer.hasRemaining())// 判断是否还有可读取的字节
+                    sb.append((char) byteBuffer.get());
+                byteBuffer.clear();// 清除缓存区，很重要的方法
+            }
+            return readAllLines(sb.toString().getBytes());
+        } finally {in.close();}
+    }
+
+    // after the process is run, we call this method with the String
+    public static List<String> readAllLines(byte[] data) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data)));
+        List<String> result = new ArrayList<>();
+        for (; ; ) {
+            String line = reader.readLine();
+            if (line == null)
+                break;
+            result.add(line);
+        }
+        return result;
     }
 }
