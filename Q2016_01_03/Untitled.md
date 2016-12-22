@@ -15,7 +15,8 @@ AbstractCollection 的主要作用：它实现了 Collection 接口中的大部�
 
    
 2 TreeSet继承了什么Set，与HashSet的区别是？HashSet与HashTable是“一脉相承”的么？
-
+TreeSet 和 HashSet 类图如下:
+ ![](set.png)
 3 Queue接口增加了哪些方法，这些方法的作用和区别是？
 4 LinkedList也是一种Queue么？是否是双向链表?
 5 Java数组如何与Collection相互转换
