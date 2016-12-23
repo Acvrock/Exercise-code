@@ -17,7 +17,36 @@ AbstractCollection 的主要作用：它实现了 Collection 接口中的大部�
 2 TreeSet继承了什么Set，与HashSet的区别是？HashSet与HashTable是“一脉相承”的么？
 TreeSet 和 HashSet 类图如下:
  ![](set.png)
-3 Queue接口增加了哪些方法，这些方法的作用和区别是？
+ 可以看到，TreeSet 和 HashSet 都继承了 AbstractSet，都实现了 Serializable、Cloneable 接口，所以可以说HashSet与HashTable是“一脉相承”的，但是对比 HashSet，TreeSet 实现了 NavigableSet、SortedSet 接口
+ SortedSet 具有排序功能，它支持对 Set 中的元素排序，提供了三大功能，分别是
+ 
+ ```
+ public interface SortedSet<E> extends Set<E> {
+    // Range-view 范围查看 
+    SortedSet<E> subSet(E fromElement, E toElement);
+    SortedSet<E> headSet(E toElement);
+    SortedSet<E> tailSet(E fromElement);
+
+    // Endpoints  端点
+    E first();
+    E last();
+
+    // Comparator access  访问 Comparator
+    Comparator<? super E> comparator();
+}
+ ```
+ 
+ NavigableSet  直译成中文就是：可导航的 Set,是 SortedSet 的子接口，有 ConcurrentSkipListSet, TreeSet 两种实现       
+增加了返回小于（lower）、小于等于（floor）、大于等于（ceiling）和大于（higher）输入参数的一个元素的方法     
+弹出第一个(pollFirst)，最后一个元素(pollLast)、    
+以及正向和逆向的迭代器、     
+返回更小的元素集合(headSet)，更大的元素集合(tailSet)，区间元素集合(subSet)
+ ![](QQ20161223-0@2x.png)
+ 
+3 Queue接口增加了哪些方法，这些方法的作用和区别是？   
+Queue 结构图如下：   
+ ![](QQ20161223-2@2x.png)    
+ 
 4 LinkedList也是一种Queue么？是否是双向链表?
 5 Java数组如何与Collection相互转换
 6 Map的一级子接口有哪些种类，分别用作什么目的？
