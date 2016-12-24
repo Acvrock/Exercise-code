@@ -44,15 +44,70 @@ TreeSet 和 HashSet 类图如下:
  ![](QQ20161223-0@2x.png)
  
 3 Queue接口增加了哪些方法，这些方法的作用和区别是？   
-Queue 结构图如下：   
- ![](QQ20161223-2@2x.png)    
+Queue 本质上是一个操作受限的集合，结构图如下：   
+ ![](QQ20161223-2@2x.png)   
+  
+```
+ offer       添加一个元素并返回插入结果,优于add，因为如果队列已满，则返回false，不抛出异常  
+ remove   	 移除并返回队列头部的元素， 如果队列为空，则抛出一个异常   
+ poll        移除并返问队列头部的元素，优于remove,因为如果队列为空，则返回null   
+ element     返回队列头部的元素，如果队列为空，则抛出一个异常      
+ peek        返回队列头部的元素，优于peek,因为如果队列为空，则返回null       
+```
  
 4 LinkedList也是一种Queue么？是否是双向链表?
+LinkedList 实现了 Queue 接口，所以可以作为队列，作为 FIFO 的队列时，下表的方法等价：
+
+队列方法 | 	等效方法
+---- | ----
+add(e) |	addLast(e)
+offer(e) | offerLast(e)
+remove() | removeFirst()
+poll()	| pollFirst()
+element() | getFirst()
+peek()	| peekFirst()
+
+LinkedList 是双向链表实现，从下图可以看出，它分别记录了头节点和尾节点，便于双向遍历   
+![](QQ20161224-0@2x.png)   
 5 Java数组如何与Collection相互转换
-6 Map的一级子接口有哪些种类，分别用作什么目的？
+
+Collection to Array:    
+1. ```Bar[] result = foos.stream().map(Bar::new).toArray(Bar[]::new);```     
+2. ```Foo[] foos = x.toArray(new Foo[x.size()]); ```   
+3. 
+ 
+```
+int i = 0;   
+Bar[] bars = new Bar[fooCollection.size()];
+for( Foo foo : fooCollection ) { // where fooCollection is Collection<Foo>
+    bars[i++] = new Bar(foo);
+}    
+``` 
+
+Array to Collection:   
+1. ```XXX xxx = new XXX(Arrays.asList(array));```   
+2. ```Collections.addAll(list, array); ```  
+3. ```XXX xxx = Arrays.stream(array).collect(Collectors.toXXX());``` 
+
+6 Map的一级子接口有哪些种类，分别用作什么目的？  
+下图为 Map 实现类和子接口 
+![](QQ20161224-3@2x.png)   
+子接口有：   
+Bindings,      不明
+ConcurrentMap<K,V>,   定义了几个基于 CAS（Compare and Set）操作
+MessageContext,   不明     
+ObservableMap,   允许注册观察者跟踪 Map 值的更改   
+SortedMap<K,V>    可进行排序的 Map    
+XSNamedMap,      为内部使用的接口，不明   
 7 HashSet 与HashMap中放入的自定义对象必须要实现哪些方法，说明原因
-8 TreeSet里的自定义对象必须要实现什么方法，说明原因
-9 LinkedHashMap使用什么来保存数据，其效率与HashMap相比如何？它又有什么独特特性
+如果要将自定义的对象放入到HashMap或HashSet中，需要@Override hashCode()和equals()方法。hashCode()方法决定了对象会被放到哪个bucket里，当多个对象的哈希值冲突时，equals()方法决定了这些对象是否是“同一个对象”。    
+8 TreeSet里的自定义对象必须要实现什么方法，说明原因     
+因为 TreeSet 具有排序功能，所以对象集合必须实现Comparable接口,并重写compareTo()方法，通常我们需要保持 compareTo 和 equals 同步，所以最好也实现 equalse 方法    
+9 LinkedHashMap使用什么来保存数据，其效率与HashMap相比如何？它又有什么独特特性   
+LinkedHashMap 继承了 HashMap ，所以底层使用了数组来保存数据，用 set 来保存 key 集合，但是它又新增了 head 和 tail 实现双向循环链表，下面是开销情况：
+![](9Ete5.jpg)      
+对比 HashMap Hash的无序性，LinkedHashMap 的元素可以按插入顺序或访问顺序排列                        
+
 10 IdentityHashMap 里面如果按照下面的方法放入对象，分别是什么结果，请解释原因
         Integer a=5;
         Integer b=5;
@@ -65,9 +120,14 @@ Queue 结构图如下：
        map.put(a,"100");
         map.put(b,"100";
         System.out.println(map.size);
+结果如图:
+![](QQ20161224-1@2x.png)   
+原因是：是 IdentityHashMap 使用的是==比较key的值，调用 Integer.valueOf, 当值小于 127 时，返回的都是 IntegerCache 的值，所以 IdentityHashMap 认为它是同一个 key ，128 开始就返回一个新的 Integer, IdentityHashMap就认为不相等了    
 
 加分题，
 给出ＪＤＫ　１.８的java 集合框架全图谱（Class类图）， 并标明1.7与1.8里出现的新的类，解释其目的
 
 
-[Java 集合系列02之 Collection架构](http://www.cnblogs.com/skywang12345/p/3308513.html#a4)
+[Java 集合系列02之 Collection架构](http://www.cnblogs.com/skywang12345/p/3308513.html#a4)   
+[Java HashSet和HashMap源码剖析](http://www.importnew.com/19892.html)   
+[Difference between HashMap, LinkedHashMap and TreeMap](http://stackoverflow.com/questions/2889777/difference-between-hashmap-linkedhashmap-and-treemap)
