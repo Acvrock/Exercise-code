@@ -7,6 +7,13 @@
     <groupId>com.acvrock</groupId>
     <artifactId>Q2016_01_03</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.3.RELEASE</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

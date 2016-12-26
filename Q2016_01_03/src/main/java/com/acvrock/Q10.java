@@ -1,7 +1,6 @@
 package com.acvrock;
 
 import java.util.IdentityHashMap;
-import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by moon on 24/12/2016.
@@ -34,7 +33,5 @@ public class Q10 {
         map.put(a,"100");
         map.put(b,"100");
         System.out.println(map.size());
-        ArrayBlockingQueue arrayBlockingQueue = new ArrayBlockingQueue();
-
     }
 }
