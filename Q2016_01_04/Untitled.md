@@ -3,7 +3,7 @@
  可从 stream 的文档中找到答案，   
   1. 无存储。 流不是存储元素的数据结构; 而是通过"计算操作的流水线"的形式表达来自诸如数据结构，阵列，生成器函数或 I/O 通道的源的元素。   
   2. 本质是函数。对 Stream 对象操作能得到一个结果，但是不会修改原始数据。   
-  3. Laziness-seeking（延迟搜索）：Stream 的很多操作如 filter、map、sort 和 duplicate    removal(去重）可以延迟实现，意思是我们只要检查到满足要求的元素就可以返回。   
+  3. Laziness-seeking（延迟执行）：Stream 的很多操作如 filter、map、sort 和 duplicate    removal(去重）可以延迟实现，意思是我们只要检查到满足要求的元素就可以返回。   
   4. 可能是不受限制的：Streams 允许 Client 取足够多的元素直到满足某个条件为止。而 Collections 不能这么做。   
  5. 消耗的。Steam 中的元素在 steam 生存期内只能被访问一次。   
  
@@ -14,7 +14,9 @@ Stream.of("d2", "a2", "b1", "b3", "c")
         return true;
     })
     .forEach(s -> System.out.println("forEach: " + s));
-    
+    代码如下图：
+    ![](QQ20161228-0@2x.png)   
+    filter 是中间操作，可以延迟执行，forEach 是终结操作，会立即执行，所以 filter 和 forEach 里的操作会一起执行    
 3  用Stream的API实现第四题的结果，其中增加一个过滤条件，即年薪大于10万的才被累加，分别用ParellStream与普通Stream来运算，看看效果的差距
 
 4 自己动手编写不少于5个Stream的例子，并解释代码
