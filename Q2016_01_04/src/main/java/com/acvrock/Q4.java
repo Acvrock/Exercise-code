@@ -1,12 +1,9 @@
 package com.acvrock;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -131,22 +128,22 @@ public class Q4 {
 //        存进文件
         write("salaries", bytes);
 
-//        取出文件内的数据并分组
-        Map<String, List<Integer>> salarieMap = Files.readAllLines(Paths.get("salaries"), Charset.defaultCharset())
-                .stream().filter(ss -> Integer.parseInt(ss.substring(6, ss.lastIndexOf(","))) > 10 * W)
-                .collect(
-                        groupingBy(s -> s.substring(0, 2), mapping(s1 -> Integer.parseInt(s1.substring(6, s1.lastIndexOf(","))), toList())));
-//        排序
-        Object[] objects = salarieMap
-                .entrySet()
-                .stream()
-                .sorted(
-                        (f1, f2) ->
-                                Long.compare(f2.getValue().stream().mapToInt(Integer::intValue).sum()
-                                        , f1.getValue().stream().mapToInt(Integer::intValue).sum()))
-                .limit(10).map(
-                        keys -> new String(keys.getKey() + "," + keys.getValue().stream().mapToInt(Integer::intValue).sum() + "," + keys.getValue().stream().count()))
-                .toArray();
+////        取出文件内的数据并分组
+//        Map<String, List<Integer>> salarieMap = Files.readAllLines(Paths.get("salaries"), Charset.defaultCharset())
+//                .stream().filter(ss -> Integer.parseInt(ss.substring(6, ss.lastIndexOf(","))) > 10 * W)
+//                .collect(
+//                        groupingBy(s -> s.substring(0, 2), mapping(s1 -> Integer.parseInt(s1.substring(6, s1.lastIndexOf(","))), toList())));
+////        排序
+//        Object[] objects = salarieMap
+//                .entrySet()
+//                .stream()
+//                .sorted(
+//                        (f1, f2) ->
+//                                Long.compare(f2.getValue().stream().mapToInt(Integer::intValue).sum()
+//                                        , f1.getValue().stream().mapToInt(Integer::intValue).sum()))
+//                .limit(10).map(
+//                        keys -> new String(keys.getKey() + "," + keys.getValue().stream().mapToInt(Integer::intValue).sum() + "," + keys.getValue().stream().count()))
+//                .toArray();
 
 //        System.out.println(Arrays.toString(objects));
     }
@@ -195,13 +192,13 @@ public class Q4 {
     // after the process is run, we call this method with the String
     public static List<String> readAllLines(byte[] data) throws IOException {
         List<String> result = new ArrayList<>();
-        byte[] bytes = new byte[13];
-        for (; ; ) {
-//            TODO  循环判断是否有 \n ，有的话可以认为是换行，截断拷贝出来
-            if (line == null)
-                break;
-            result.add(line);
-        }
+//        byte[] bytes = new byte[13];
+//        for (; ; ) {
+////            TODO  循环判断是否有 \n ，有的话可以认为是换行，截断拷贝出来
+//            if (line == null)
+//                break;
+//            result.add(line);
+//        }
         return result;
     }
 }

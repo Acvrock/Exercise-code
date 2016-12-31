@@ -28,14 +28,14 @@ public class Q3 {
 
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             stream();
         }
         long endTime = System.currentTimeMillis();
         System.out.println("程序运行时间：" + (endTime - startTime) + "ms");    //输出程序运行时间
 
         long startTime1 = System.currentTimeMillis();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             parallelStream();
         }
         long endTime1 = System.currentTimeMillis();
@@ -92,7 +92,7 @@ public class Q3 {
                     salary = new Salary();
                     salary.setBaseSalary(random.nextInt(BASESALARYRYBOUND) + BASESALARYMIN);
                     salary.setBonus(random.nextInt(BOUNDBOUND));
-                    StringBuffer buf = new StringBuffer();
+            StringBuffer buf = new StringBuffer();
                     for (int i = 0; i < 5; i++) {
                         int num = random.nextInt(62);
                         buf.append(str.charAt(num));
@@ -100,27 +100,26 @@ public class Q3 {
                     salary.setName(buf.toString());
                     return salary;
                 }
-        ).reduce(new StringBuilder(), (s1, s2) -> s1.append(s2).append('\n'), StringBuilder::append).toString().getBytes();
+        ).reduce(new StringBuffer(), (s1, s2) -> s1.append(s2).append('\n'), StringBuffer::append).toString().getBytes();
 
 //        存进文件
         write("salaries", bytes);
 
 //        取出文件内的数据并分组
         Map<String, List<Integer>> salarieMap = Files.readAllLines(Paths.get("salaries"), Charset.defaultCharset())
-                .stream().filter(ss -> Integer.parseInt(ss.substring(6, ss.lastIndexOf(","))) > 10 * W)
+                .parallelStream().filter(ss -> Integer.parseInt(ss.substring(6, ss.lastIndexOf(","))) > 10 * W)
                 .collect(
                         groupingBy(s -> s.substring(0, 2), mapping(s1 -> Integer.parseInt(s1.substring(6, s1.lastIndexOf(","))), toList())));
 //        排序
         Object[] objects = salarieMap
                 .entrySet()
-                .stream()
+                .parallelStream()
                 .sorted(
                         (f1, f2) ->
-                                Long.compare(f2.getValue().stream().mapToInt(Integer::intValue).sum()
-                                        , f1.getValue().stream().mapToInt(Integer::intValue).sum()))
+                                Long.compare(f2.getValue().parallelStream().mapToInt(Integer::intValue).sum()
+                                        , f1.getValue().parallelStream().mapToInt(Integer::intValue).sum()))
                 .limit(10).map(
-                        keys -> new String(keys.getKey() + "," + keys.getValue().stream().mapToInt(Integer::intValue).sum() + "," + keys.getValue().stream().count()))
-                .toArray();
+                        keys -> new String(keys.getKey() + "," + keys.getValue().parallelStream().mapToInt(Integer::intValue).sum() + "," + keys.getValue().parallelStream().count())).toArray();
 
 //        System.out.println(Arrays.toString(objects));
     }
