@@ -106,7 +106,8 @@ JVM中的内存分为5个虚拟的区域。如图：
 ![](jvm内存分区.png)
 
 ### 2 解释为什么会有数组的Atomic类型的对象
+因为如果不使用 AtomicXXXArray 的话就需要使用 AtomicXXX[] 来编程，但是 AtomicXXX[] 会对每一个元素都进行原子化，而 AtomicXXXArray 只是将 AtomicXXXArray 对象和一个 array 对象原子化     
+对于普通的 array 内存边界检查的成本非常小，但是如果从多个处理器中访问同一高速缓存行中的数据会导致显著的性能问题，因此使用单独的 AtomicXXXArray 对象可以避免密集元素边界检查      
  
- 
- 
+ [java8的JVM持久代——何去何从？](http://blog.csdn.net/yechaodechuntian/article/details/40341975)    
  [虚拟机规范](http://docs.oracle.com/javase/specs/jls/se8/jls8.pdf)
