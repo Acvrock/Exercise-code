@@ -23,6 +23,8 @@
  - synchronized 语句被 javac 编译成 bytecode 时，会在同步块的入口位置和退出位置分别插入 monitorenter 和 monitorexit 字节码指令。
  - synchronized 方法被 javac 编译成 bytecode 时，会被翻译成普通的方法调用和返回指令如: invokevirtual、areturn 指令，在 VM 字节码层面并没有任何特别的指令来实现被 synchronized 修饰的方法，而是在 Class 文件的方法表中将该方法的 access_flags 字段中的 synchronized 标志位置1，表示该方法是同步方法并使用调用该方法的对象或该方法所属的 Class 在 JVM 的内部对象表示 Klass 做为锁对象。   
 
+如下图：
+![](QQ20170112-234629@2x.png)
  
 
 
