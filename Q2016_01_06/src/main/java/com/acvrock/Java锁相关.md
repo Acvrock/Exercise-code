@@ -25,27 +25,35 @@
 
 如下图：
 ![](QQ20170112-234629@2x.png)
- 
 
 
-
-
- 
  2 说说为什么下面的代码是错误的
  public void doIt() { syncronized(new ObjA()) {xxxx}
  
+ 因为 synchronized 锁的都是对象，new ObjA() 每次都会产生一个新对象，所以不能正确得加锁   
+ PS:在 Web 开发中，经常有需要锁住某个从前端传入的资源 ID 的情况，因为 synchronized 锁的都是对象，判断对象是否相同使用的是 == 判断，但是在 -128 至 127 之间的 Integer 对象是在 IntegerCache.cache 产生，会复用已有对象，这个区间内的 Integer 值可以直接使用 == 进行判断，所以会造成用 synchronized 成功锁住了不同线程传入 Integer 对象的假象,所以需要避免      为了减少 synchronized 的影响范围，可以使用 synchronized (string.intern())   
+
  
  3 说说下面的代码为什么是错误的
  
  public void doIt() {synchrnized(myobj) { if(xxx) { myobjA.wait();}...}
  
-  
- 4 将05作业-TestOnly.java 中的代码中的错误一一修订，并确保其永远执行成功
+ 答:因为   
  
+ 1. 任何一个时刻，对象的控制权（monitor）只能被一个线程拥有。
+ 2. 无论是执行对象的wait、notify还是notifyAll方法，必须保证当前运行的线程取得了该对象的控制权（monitor）
+ 3. 如果在没有控制权的线程里执行对象的以上三种方法，就会报java.lang.IllegalMonitorStateException异常。
+
+  
+4 将05作业-TestOnly.java 中的代码中的错误一一修订，并确保其永远执行成功   
+ 修改四处   
+ ![](QQ20170114-214939@2x.png)
  
  
 加分题
-1 用Lock方式与ReadWriteLock方式 对第四题进行改进，并说明思路
+1 用Lock方式与ReaWriteLock方式 对第四题进行改进，并说明思路    
+![](QQ20170114-225029@2x.png)
+![](QQ20170114-225126@2x.png)
 2 用多线程方式实现第二课的第四题，其中计算线程数为8个，可能的思路：
        文件的总记录读取后分为8份，每个线程处理一份，所有线程都完成后，再累计汇总，输出结果
        
