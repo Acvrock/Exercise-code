@@ -1,38 +1,33 @@
-buildscript {
-	ext {
-		springBootVersion = '1.4.3.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+//用allprojects方法给所有的项目添加group和version属性
+allprojects {
+    group = 'com.acvrock'
+    version = '1.0'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-
-jar {
-	baseName = 'slight-snack'
-	version = '0.0.1-SNAPSHOT'
+//定义版本号
+ext {
+    bootVersion = "1.4.2.RELEASE"
+    tomcat_embed = "8.5.4"
+    bootMybatisVersion = "1.2.0"
 }
 
-sourceCompatibility = 1.8
+// 所有子项目的通用配置
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
 
-repositories {
-	mavenCentral()
+// JVM 版本号要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web:${bootVersion}"
+        compileOnly "org.projectlombok:lombok:1.16.10"
+    }
 }
 
 
-dependencies {
-	compile('org.springframework.boot:spring-boot-starter-aop')
-	compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
-	compile('org.springframework.boot:spring-boot-starter-data-redis')
-	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.2.0')
-	runtime('mysql:mysql-connector-java')
-	compileOnly('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-}
