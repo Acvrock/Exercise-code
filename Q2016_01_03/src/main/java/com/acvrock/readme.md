@@ -17,7 +17,7 @@ AbstractCollection 的主要作用：它实现了 Collection 接口中的大部�
 2 TreeSet继承了什么Set，与HashSet的区别是？HashSet与HashTable是“一脉相承”的么？
 TreeSet 和 HashSet 类图如下:
  ![](set.png)
- 可以看到，TreeSet 和 HashSet 都继承了 AbstractSet，都实现了 Serializable、Cloneable 接口，所以可以说HashSet与HashTable是“一脉相承”的，但是对于 HashSet 来说，TreeSet 实现了 NavigableSet、SortedSet 接口
+ 可以看到，TreeSet 和 HashSet 都继承了 AbstractSet，都实现了 Serializable、Cloneable 接口，但是对于 HashSet 来说，TreeSet 实现了 NavigableSet、SortedSet 接口
  SortedSet 具有排序功能，它支持对 Set 中的元素排序，提供了三大功能，分别是
  
  ```
@@ -42,6 +42,8 @@ TreeSet 和 HashSet 类图如下:
 以及正向和逆向的迭代器、     
 返回更小的元素集合(headSet)，更大的元素集合(tailSet)，区间元素集合(subSet)
  ![](QQ20161223-0@2x.png)
+ 
+ HashSet与HashTable 不是是“一脉相承”的，因为 HashSet 实现了 Set 接口，HashTable 实现了 Map 接口
  
 3 Queue接口增加了哪些方法，这些方法的作用和区别是？    
 Queue 本质上是一个操作受限的集合，结构图如下：   
