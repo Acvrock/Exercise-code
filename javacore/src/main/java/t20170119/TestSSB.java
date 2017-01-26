@@ -12,6 +12,7 @@ public class TestSSB {
         System.out.println(toString(data));
     }
 
+
     private static void sort(int[] data, int low, int high) {
         if (low < high) {
             int partition = partition(data, low, high);
