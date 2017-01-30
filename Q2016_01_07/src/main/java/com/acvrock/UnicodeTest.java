@@ -17,6 +17,5 @@ public class UnicodeTest {
 //        System.out.println(c.codePointAt(1));
         System.out.println(c.charAt(0));
         System.out.println(Arrays.toString(c.getBytes()));
-
     }
 }
