@@ -26,7 +26,6 @@ public class ScanFolder {
         Stream<Path> stream = Files.find(start, maxDepth, (path, attr) ->
                 String.valueOf(path).endsWith(suffix));
         Path[] paths = stream.toArray(size -> new Path[size]);
-        System.out.println("paths.length:"+paths.length);
         return paths;
 
     }

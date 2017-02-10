@@ -1,15 +1,15 @@
 package com.acvrock.search;
 
 /**
- * Created by moon on 2016-10-17.
+ * Created by moon on 2017-2-3.
  */
 public class Q2 {
 
     public static void main(String[] args) {
         long startTime=System.currentTimeMillis();   //获取开始时间
-        String path = "/Users/moon/Github/";
+        String path = "/Users/moon/test/";
         String suffix = ".java";
-        String searchKey = "com";
+        String searchKey = "Acvrock.com";
         SearchInFileI searchInFile = new SearchInFileImpl(path, suffix, 8);
         SearchResult indexResults = searchInFile.searchInFiles(searchKey);
         System.out.println(String.format("%s 总共出现 %s 次",searchKey,indexResults.resultSum()));
