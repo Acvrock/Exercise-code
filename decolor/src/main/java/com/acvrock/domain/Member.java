@@ -19,7 +19,7 @@ public class Member implements UserDetails{ //1
 	private String memberPhone;
 	private String memberName;
 	private String memberPwd;
-	private String memberScore;
+	private Long memberScore;
 
 	
 	@ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
@@ -101,11 +101,11 @@ public class Member implements UserDetails{ //1
 		this.memberPwd = memberPwd;
 	}
 
-	public String getMemberScore() {
+	public Long getMemberScore() {
 		return memberScore;
 	}
 
-	public void setMemberScore(String memberScore) {
+	public void setMemberScore(Long memberScore) {
 		this.memberScore = memberScore;
 	}
 

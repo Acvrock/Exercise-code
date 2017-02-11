@@ -1,14 +1,13 @@
 package com.acvrock.domain;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 public class ScoreRecord {
     @Id
     @GeneratedValue
     private Long scoreRecordID;
-    private BigDecimal growthScore;
+    private Long growthScore;
     private Long createTime;
     private String remark;
 
@@ -25,11 +24,11 @@ public class ScoreRecord {
 
 
 
-    public BigDecimal getGrowthScore() {
+    public Long getGrowthScore() {
         return growthScore;
     }
 
-    public void setGrowthScore(BigDecimal growthScore) {
+    public void setGrowthScore(Long growthScore) {
         this.growthScore = growthScore;
     }
 
@@ -49,4 +48,11 @@ public class ScoreRecord {
         this.remark = remark;
     }
 
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }

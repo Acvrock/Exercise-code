@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><!-- 1 -->
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta content="text/html;charset=UTF-8"/>
-    <title sec:authentication="name"></title> <!-- 2 -->
+    <title sec:authentication="name"></title>
     <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+    <script th:src="@{js/jquery.2.1.1.min.js}"></script>
+    <script th:src="@{js/bootstrap.3.3.7.min.js}"></script>
     <style type="text/css">
         body {
             padding-top: 50px;
@@ -17,20 +19,28 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Spring boot</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">decolor</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/}"> 首页 </a></li>
                 <li><a th:href="@{/scoreRecord}"> 积分记录 </a></li>
+                <li><a th:href="@{/editPassword}"> 修改密码 </a></li>
+                <li><a th:href="@{/transferScore}"> 积分转赠 </a></li>
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
 </nav>
-
 
 <div class="container">
 
@@ -39,11 +49,14 @@
 
         <ul class="list-group" >
             <li class="list-group-item" th:each="prod : ${msg.etraInfo}"
-                th:text="'积分金额:'+${prod.growthScore}+' 创建时间：'+${prod.createTime}+' 备注：'+${prod.remark}">积分金额:-1
+                th:text="'积分金额:'+${prod.growthScore}+' 操作时间：'+${#dates.format(prod.createTime, 'yyyy年MM月dd日 HH时mm分ss秒')}+' 备注：'+${prod.remark}">积分金额:-1
                 创建时间：2017-02-11 备注：自动转入
             </li>
+            <li class="list-group-item" th:if="${msg.etraInfo.totalPages == 0}"
+                th:text="'暂无变更积分记录'">
+            </li>
         </ul>
-        <div class="table-pagination"  th:with="contactsPage = ${msg.etraInfo}">
+        <div class="table-pagination"  th:with="contactsPage = ${msg.etraInfo}" th:if="${msg.etraInfo.totalPages &gt; 0}">
             <ul class="pagination">
                 <li th:class="${contactsPage.number eq 0} ? 'disabled' : ''">
                     <a th:if="${not contactsPage.first}" th:href="@{${'/scoreRecord'}(page=${contactsPage.number-1},size=${contactsPage.size})}">&laquo;</a>

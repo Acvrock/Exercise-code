@@ -26,7 +26,7 @@ public class Msg {
 	public Object getEtraInfo() {
 		return etraInfo;
 	}
-	public void setEtraInfo(String etraInfo) {
+	public void setEtraInfo(Object etraInfo) {
 		this.etraInfo = etraInfo;
 	}
 	
