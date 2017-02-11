@@ -115,4 +115,16 @@ public class Member implements UserDetails{ //1
 	public void setRoles(List<MemberRole> roles) {
 		this.roles = roles;
 	}
+
+	@Override
+	public String toString() {
+		return "Member{" +
+				"memberID=" + memberID +
+				", memberPhone='" + memberPhone + '\'' +
+				", memberName='" + memberName + '\'' +
+				", memberPwd='" + memberPwd + '\'' +
+				", memberScore='" + memberScore + '\'' +
+				", roles=" + roles +
+				'}';
+	}
 }

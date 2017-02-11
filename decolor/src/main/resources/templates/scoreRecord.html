@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><!-- 1 -->
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <title sec:authentication="name"></title> <!-- 2 -->
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Spring boot</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}"> 首页 </a></li>
+                <li><a th:href="@{/scoreRecord}"> 积分记录 </a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1 th:text="${msg.title}"></h1>
+
+        <ul class="list-group" >
+            <li class="list-group-item" th:each="prod : ${msg.etraInfo}"
+                th:text="'积分金额:'+${prod.growthScore}+' 创建时间：'+${prod.createTime}+' 备注：'+${prod.remark}">积分金额:-1
+                创建时间：2017-02-11 备注：自动转入
+            </li>
+        </ul>
+        <div class="table-pagination"  th:with="contactsPage = ${msg.etraInfo}">
+            <ul class="pagination">
+                <li th:class="${contactsPage.number eq 0} ? 'disabled' : ''">
+                    <a th:if="${not contactsPage.first}" th:href="@{${'/scoreRecord'}(page=${contactsPage.number-1},size=${contactsPage.size})}">&laquo;</a>
+                    <a th:if="${contactsPage.first}" href="javascript:void(0);">&laquo;</a>
+                </li>
+
+                <li th:each="pageNo : ${#numbers.sequence(0, contactsPage.totalPages - 1)}" th:class="${contactsPage.number eq pageNo}? 'active' : ''">
+                    <a th:if="${contactsPage.number  eq pageNo}" href="javascript:void(0);">
+                        <span th:text="${pageNo + 1}"></span>
+                    </a>
+                    <a th:if="${not (contactsPage.number  eq pageNo)}" th:href="@{${'/scoreRecord'}(page=${pageNo},size=${contactsPage.size})}">
+                        <span th:text="${pageNo + 1}"></span>
+                    </a>
+
+                </li>
+                <li th:class="${contactsPage.number + 1 ge contactsPage.totalPages} ? 'disabled' : ''">
+                    <a th:if="${not contactsPage.last}" th:href="@{${'/scoreRecord'}(page=${contactsPage.number+1},size=${contactsPage.size})}">&raquo;</a>
+                    <a th:if="${contactsPage.last}" href="javascript:void(0);">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

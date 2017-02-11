@@ -3,9 +3,9 @@ package com.acvrock.domain;
 public class Msg {
 	private String title;
 	private String content;
-	private String etraInfo;
+	private Object etraInfo;
 	
-	public Msg(String title, String content, String etraInfo) {
+	public Msg(String title, String content, Object etraInfo) {
 		super();
 		this.title = title;
 		this.content = content;
@@ -23,7 +23,7 @@ public class Msg {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getEtraInfo() {
+	public Object getEtraInfo() {
 		return etraInfo;
 	}
 	public void setEtraInfo(String etraInfo) {
