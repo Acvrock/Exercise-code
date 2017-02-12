@@ -1,4 +1,4 @@
-package com.acvrock.security;
+package com.acvrock.service;
 
 import com.acvrock.dao.MemberRepository;
 import com.acvrock.domain.Member;

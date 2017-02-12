@@ -1,4 +1,4 @@
-package com.acvrock.security;
+package com.acvrock.service;
 
 import com.acvrock.dao.MemberRepository;
 import com.acvrock.dao.ScoreRecordRepository;
@@ -32,6 +32,11 @@ public class ScoreRecordService {
         if (memberName.equals(member.getMemberName())) {
             msg.setContent("1");
             msg.setEtraInfo("不能自己送于自己积分");
+            return msg;
+        }
+        if (score<=0) {
+            msg.setContent("1");
+            msg.setEtraInfo("积分不能小于等于 0");
             return msg;
         }
         Member otherSide = memberRepository.findByMemberName(memberName);
