@@ -12,4 +12,3 @@
                public interface pervlet
                    public PvReponse handlerRequest(PvRequest req)
            采用JDK Compile API来动态编译xxx.msp到class，并且加载执行。
-                    
