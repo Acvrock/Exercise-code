@@ -14,6 +14,8 @@ public class UnicodeTest {
         System.out.println(c.length());
         System.out.println(c.codePointCount(0, c.length()));
         System.out.println(c.codePointAt(0));
+//        c.codePointAt(0).
+        System.out.println(new String(new int[]{c.codePointAt(0)}, 0, 1));
 //        System.out.println(c.codePointAt(1));
         System.out.println(c.charAt(0));
         System.out.println(Arrays.toString(c.getBytes()));
