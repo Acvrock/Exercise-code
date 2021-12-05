@@ -51,7 +51,7 @@ public class GrayCode {
     }
 
     public static List<Integer> grayCode(int n) {
-        ArrayList<Integer> res = new ArrayList<>() {{
+        ArrayList<Integer> res = new ArrayList() {{
             add(0);
         }};
         int head = 1;
