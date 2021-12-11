@@ -1,6 +1,7 @@
 package digits;
 
 import digits.model.TreeNode;
+import digits.utils.TreeUtils;
 
 import java.util.*;
 
@@ -27,36 +28,13 @@ public class MaximumDepthOfBinaryTreeQueue {
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(3, 9, 20, null, null, 15, 7);
         Integer[] arrays = list.toArray(new Integer[list.size()]);
-        TreeNode root = fromArray(arrays);
+        TreeNode root = TreeUtils.fromArray(arrays);
         int x = maxDepth(root);
         System.out.println(x);
     }
 
 
-    public static TreeNode fromArray(Integer[] tree) {
-        if (tree.length == 0) return null;
-        TreeNode root = new TreeNode(tree[0]);
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        boolean left = true;
-        for (int i = 1; i < tree.length; i++) {
-            TreeNode node = q.peek();
-            if (left) {
-                if (tree[i] != null) {
-                    node.left = new TreeNode(tree[i]);
-                    q.add(node.left);
-                }
-            } else {
-                if (tree[i] != null) {
-                    node.right = new TreeNode(tree[i]);
-                    q.add(node.right);
-                }
-                q.remove();
-            }
-            left = !left;
-        }
-        return root;
-    }
+
 
     public static int maxDepth(TreeNode root) {
         if (root == null) {
